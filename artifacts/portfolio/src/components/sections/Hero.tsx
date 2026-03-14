@@ -1,15 +1,29 @@
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Github, Linkedin, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function Hero() {
+  const [titleNumber, setTitleNumber] = useState(0);
+  const titles = useMemo(
+    () => ["a Web Developer", "a CS Student", "a Problem Solver", "a Builder", "an Innovator"],
+    []
+  );
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setTitleNumber((prev) => (prev === titles.length - 1 ? 0 : prev + 1));
+    }, 2000);
+    return () => clearTimeout(timeoutId);
+  }, [titleNumber, titles]);
+
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-      {/* Background Image / Gradient */}
+      {/* Background */}
       <div className="absolute inset-0 -z-20">
-        <img 
-          src={`${import.meta.env.BASE_URL}images/hero-bg.png`} 
-          alt="Abstract background" 
+        <img
+          src={`${import.meta.env.BASE_URL}images/hero-bg.png`}
+          alt="Abstract background"
           className="w-full h-full object-cover opacity-30 dark:opacity-40"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/80 to-background backdrop-blur-[2px]" />
@@ -17,6 +31,7 @@ export function Hero() {
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
+          {/* Status badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -30,25 +45,48 @@ export function Hero() {
             <span className="text-sm font-medium text-muted-foreground">Available for opportunities</span>
           </motion.div>
 
-          <motion.h1 
+          {/* Name */}
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6"
           >
-            Hi, I'm <span className="text-gradient">Izhaan Zia</span>
+            Hi, I'm{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
+              Izhaan Zia
+            </span>
           </motion.h1>
 
-          <motion.p 
+          {/* Animated role */}
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xl md:text-2xl text-muted-foreground font-medium mb-4"
+            className="text-2xl md:text-3xl font-semibold text-foreground mb-4 flex items-center justify-center gap-2"
           >
-            Computer Science Student & Web Developer
-          </motion.p>
-          
-          <motion.div 
+            <span className="text-muted-foreground font-normal">I am</span>
+            <span className="relative inline-flex h-10 overflow-hidden items-center w-56 md:w-72 justify-start">
+              {titles.map((title, index) => (
+                <motion.span
+                  key={index}
+                  className="absolute text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent font-bold whitespace-nowrap"
+                  initial={{ opacity: 0, y: 40 }}
+                  transition={{ type: "spring", stiffness: 50 }}
+                  animate={
+                    titleNumber === index
+                      ? { y: 0, opacity: 1 }
+                      : { y: titleNumber > index ? -40 : 40, opacity: 0 }
+                  }
+                >
+                  {title}
+                </motion.span>
+              ))}
+            </span>
+          </motion.div>
+
+          {/* Location */}
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
@@ -58,6 +96,7 @@ export function Hero() {
             <span>Nagpur, India</span>
           </motion.div>
 
+          {/* Tagline */}
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -67,24 +106,35 @@ export function Hero() {
             "Building the web, one line at a time."
           </motion.h2>
 
-          <motion.div 
+          {/* CTA buttons */}
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
           >
-            <Button size="lg" className="w-full sm:w-auto rounded-full group h-14 px-8 text-base shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-1 transition-all duration-300" asChild>
+            <Button
+              size="lg"
+              className="w-full sm:w-auto rounded-full group h-14 px-8 text-base shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-1 transition-all duration-300"
+              asChild
+            >
               <a href="#projects">
                 View My Work
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
             </Button>
-            <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-full group h-14 px-8 text-base hover:bg-secondary hover:-translate-y-1 transition-all duration-300" asChild>
+            <Button
+              size="lg"
+              variant="outline"
+              className="w-full sm:w-auto rounded-full group h-14 px-8 text-base hover:bg-secondary hover:-translate-y-1 transition-all duration-300"
+              asChild
+            >
               <a href="#contact">Get In Touch</a>
             </Button>
           </motion.div>
 
-          <motion.div 
+          {/* Social links */}
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.8 }}
@@ -93,9 +143,9 @@ export function Hero() {
             {[
               { icon: Github, href: "https://github.com/izhaanzia", label: "GitHub" },
               { icon: Linkedin, href: "#", label: "LinkedIn" },
-              { icon: Mail, href: "mailto:izhaanzia@gmail.com", label: "Email" }
+              { icon: Mail, href: "mailto:izhaanzia@gmail.com", label: "Email" },
             ].map((social, index) => (
-              <a 
+              <a
                 key={index}
                 href={social.href}
                 target="_blank"
@@ -109,9 +159,9 @@ export function Hero() {
           </motion.div>
         </div>
       </div>
-      
+
       {/* Scroll indicator */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
@@ -119,7 +169,7 @@ export function Hero() {
       >
         <span className="text-xs font-medium text-muted-foreground uppercase tracking-widest">Scroll</span>
         <div className="w-px h-12 bg-border relative overflow-hidden">
-          <motion.div 
+          <motion.div
             animate={{ y: ["-100%", "200%"] }}
             transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
             className="absolute inset-0 bg-primary"
