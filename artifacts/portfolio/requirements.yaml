@@ -1,0 +1,16 @@
+packages:
+  "framer-motion": "For premium page transitions and scroll-triggered reveal animations"
+  "clsx": "Utility for constructing className strings conditionally"
+  "tailwind-merge": "Utility to merge tailwind classes safely"
+
+images:
+  - path: "artifacts/portfolio/public/images/hero-bg.png"
+    description: "Abstract, modern dark aesthetic background with subtle deep blue and purple gradient meshes, extremely dark and elegant, geometric lines, perfect for a high-end developer portfolio"
+    aspect_ratio: "16:9"
+  - path: "artifacts/portfolio/public/images/abstract-code.png"
+    description: "3D glassmorphic rendering of programming symbols and code brackets floating in a dark ethereal space, subtle glowing cyan and indigo lighting, ultra-realistic, highly detailed"
+    aspect_ratio: "4:3"
+
+notes:
+  - This is a frontend-only SPA portfolio. No API integration required.
+  - Relying on native CSS scroll-behavior: smooth for anchor links.
