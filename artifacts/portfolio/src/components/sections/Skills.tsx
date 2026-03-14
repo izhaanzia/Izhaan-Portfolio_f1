@@ -64,7 +64,7 @@ export function Skills() {
                   {category.skills.map((skill, sIdx) => (
                     <GlassEffect
                       key={sIdx}
-                      className="rounded-full px-3 py-1.5 cursor-default hover:scale-105 transition-transform duration-200"
+                      className="rounded-full px-3 py-1.5 cursor-default hover:px-5 transition-all duration-300"
                     >
                       <span className="text-sm font-medium text-foreground">{skill}</span>
                     </GlassEffect>
