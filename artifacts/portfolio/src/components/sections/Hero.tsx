@@ -44,13 +44,13 @@ export function Hero() {
             transition={{ duration: 0.5 }}
             className="inline-block mb-8"
           >
-            <GlassEffect className="inline-flex items-center gap-2 px-4 py-2 rounded-full cursor-default">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border/60 shadow-sm cursor-default">
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
               </span>
               <span className="text-sm font-medium text-foreground">Available for opportunities</span>
-            </GlassEffect>
+            </span>
           </motion.div>
 
           {/* Name */}
@@ -150,9 +150,11 @@ export function Hero() {
                 key={index}
                 href={social.href}
                 target={social.href.startsWith("mailto") ? "_self" : "_blank"}
-                className="w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 cursor-pointer"
+                className="w-12 h-12 rounded-full hover:scale-110 cursor-pointer"
               >
-                <social.icon className="w-5 h-5 text-foreground" />
+                <div className="w-12 h-12 flex items-center justify-center">
+                  <social.icon className="w-5 h-5 text-foreground" />
+                </div>
               </GlassEffect>
             ))}
           </motion.div>
