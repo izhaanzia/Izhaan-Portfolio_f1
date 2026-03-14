@@ -1,7 +1,7 @@
 import { Section } from "@/components/ui/section";
 import { motion } from "framer-motion";
 import { Code, Layout, Lightbulb, Terminal } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { GlassCard } from "@/components/ui/liquid-glass";
 
 const INTERESTS = [
   { icon: Layout, title: "Responsive Design", desc: "Building layouts that adapt perfectly to any screen size." },
@@ -12,9 +12,14 @@ const INTERESTS = [
 
 export function About() {
   return (
-    <Section id="about" title="About Me" subtitle="Who I Am">
+    <Section
+      id="about"
+      title="About Me"
+      subtitle="Who I Am"
+      className="bg-gradient-to-br from-primary/8 via-background to-accent/8"
+    >
       <div className="grid md:grid-cols-2 gap-12 items-center">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
@@ -22,15 +27,15 @@ export function About() {
         >
           <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-border/50 group">
             <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-accent/20 mix-blend-overlay z-10 group-hover:opacity-0 transition-opacity duration-500" />
-            <img 
-              src={`${import.meta.env.BASE_URL}images/abstract-code.png`} 
-              alt="Abstract Code Visualization" 
+            <img
+              src={`${import.meta.env.BASE_URL}images/abstract-code.png`}
+              alt="Abstract Code Visualization"
               className="w-full h-[400px] object-cover object-center transform group-hover:scale-105 transition-transform duration-700"
             />
           </div>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
@@ -48,20 +53,28 @@ export function About() {
               My work focuses on striking the perfect balance between usability, clean architectural code, and practical, scalable web solutions that provide real value to users.
             </p>
           </div>
-          
+
           <div className="grid sm:grid-cols-2 gap-4 mt-8">
             {INTERESTS.map((interest, idx) => (
-              <Card key={idx} className="bg-card/50 border-border/50 hover-elevate transition-all duration-300">
-                <CardContent className="p-4 flex items-start gap-4">
-                  <div className="mt-1 p-2 rounded-lg bg-primary/10 text-primary">
-                    <interest.icon className="w-5 h-5" />
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: idx * 0.1 }}
+              >
+                <GlassCard className="h-full hover:scale-[1.02] transition-transform duration-300 cursor-default">
+                  <div className="p-4 flex items-start gap-4">
+                    <div className="mt-1 p-2 rounded-lg bg-primary/10 text-primary shrink-0">
+                      <interest.icon className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-foreground">{interest.title}</h4>
+                      <p className="text-sm text-muted-foreground mt-1">{interest.desc}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground">{interest.title}</h4>
-                    <p className="text-sm text-muted-foreground mt-1">{interest.desc}</p>
-                  </div>
-                </CardContent>
-              </Card>
+                </GlassCard>
+              </motion.div>
             ))}
           </div>
         </motion.div>

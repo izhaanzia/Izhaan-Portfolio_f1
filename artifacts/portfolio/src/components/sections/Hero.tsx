@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Github, Linkedin, Mail, MapPin } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { GlassButton, GlassEffect } from "@/components/ui/liquid-glass";
 
 export function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
@@ -16,6 +16,12 @@ export function Hero() {
     }, 2000);
     return () => clearTimeout(timeoutId);
   }, [titleNumber, titles]);
+
+  const socials = [
+    { icon: Github, href: "https://github.com/izhaanzia", label: "GitHub" },
+    { icon: Linkedin, href: "#", label: "LinkedIn" },
+    { icon: Mail, href: "mailto:izhaanzia@gmail.com", label: "Email" },
+  ];
 
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
@@ -36,13 +42,15 @@ export function Hero() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card/50 border border-border/50 backdrop-blur-md mb-8 hover:border-primary/50 transition-colors cursor-default"
+            className="inline-block mb-8"
           >
-            <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
-            </span>
-            <span className="text-sm font-medium text-muted-foreground">Available for opportunities</span>
+            <GlassEffect className="inline-flex items-center gap-2 px-4 py-2 rounded-full cursor-default">
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+              </span>
+              <span className="text-sm font-medium text-foreground">Available for opportunities</span>
+            </GlassEffect>
           </motion.div>
 
           {/* Name */}
@@ -113,24 +121,21 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.5 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
           >
-            <Button
-              size="lg"
-              className="w-full sm:w-auto rounded-full group h-14 px-8 text-base shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-1 transition-all duration-300"
-              asChild
+            <GlassButton
+              href="#projects"
+              className="rounded-full px-8 py-4 hover:scale-[1.04] cursor-pointer overflow-hidden w-full sm:w-auto"
             >
-              <a href="#projects">
+              <div className="flex items-center justify-center gap-2 text-foreground font-semibold text-base group">
                 View My Work
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </a>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="w-full sm:w-auto rounded-full group h-14 px-8 text-base hover:bg-secondary hover:-translate-y-1 transition-all duration-300"
-              asChild
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </GlassButton>
+            <GlassButton
+              href="#contact"
+              className="rounded-full px-8 py-4 hover:scale-[1.04] cursor-pointer overflow-hidden w-full sm:w-auto"
             >
-              <a href="#contact">Get In Touch</a>
-            </Button>
+              <span className="text-foreground font-semibold text-base">Get In Touch</span>
+            </GlassButton>
           </motion.div>
 
           {/* Social links */}
@@ -138,23 +143,17 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.8 }}
-            className="flex items-center justify-center gap-6"
+            className="flex items-center justify-center gap-4"
           >
-            {[
-              { icon: Github, href: "https://github.com/izhaanzia", label: "GitHub" },
-              { icon: Linkedin, href: "#", label: "LinkedIn" },
-              { icon: Mail, href: "mailto:izhaanzia@gmail.com", label: "Email" },
-            ].map((social, index) => (
-              <a
+            {socials.map((social, index) => (
+              <GlassEffect
                 key={index}
                 href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.label}
-                className="w-12 h-12 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                target={social.href.startsWith("mailto") ? "_self" : "_blank"}
+                className="w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 cursor-pointer"
               >
-                <social.icon className="w-5 h-5" />
-              </a>
+                <social.icon className="w-5 h-5 text-foreground" />
+              </GlassEffect>
             ))}
           </motion.div>
         </div>

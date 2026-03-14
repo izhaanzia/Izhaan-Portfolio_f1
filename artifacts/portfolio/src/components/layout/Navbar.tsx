@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X, Code2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { GlassButton, GlassEffect } from "@/components/ui/liquid-glass";
 
 const NAV_LINKS = [
   { name: "About", href: "#about" },
@@ -17,9 +17,7 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -57,12 +55,12 @@ export function Navbar() {
               </li>
             ))}
           </ul>
-          <Button 
-            asChild
-            className="rounded-full shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5"
+          <GlassButton
+            href="#contact"
+            className="rounded-full px-6 py-2.5 hover:scale-[1.04] cursor-pointer overflow-hidden"
           >
-            <a href="#contact">Hire Me</a>
-          </Button>
+            <span className="text-sm font-semibold text-foreground">Hire Me</span>
+          </GlassButton>
         </nav>
 
         {/* Mobile Menu Toggle */}
@@ -95,13 +93,14 @@ export function Navbar() {
                   {link.name}
                 </a>
               ))}
-              <Button 
-                asChild
-                className="mt-4 w-full"
-                onClick={() => setIsMobileMenuOpen(false)}
+              <GlassButton
+                href="#contact"
+                className="rounded-xl px-6 py-3 mt-2 hover:scale-[1.02] cursor-pointer overflow-hidden"
               >
-                <a href="#contact">Hire Me</a>
-              </Button>
+                <span className="text-base font-semibold text-foreground text-center w-full block">
+                  Hire Me
+                </span>
+              </GlassButton>
             </div>
           </motion.div>
         )}
