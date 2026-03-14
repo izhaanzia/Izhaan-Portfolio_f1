@@ -54,7 +54,7 @@ export function Skills() {
       >
         {SKILL_CATEGORIES.map((category, idx) => (
           <motion.div key={idx} variants={itemVariants}>
-            <GlassCard className="h-full hover:-translate-y-1 transition-transform duration-300 cursor-default">
+            <GlassCard className="h-full hover:scale-[1.02] transition-all duration-300 cursor-default">
               <div className="p-6">
                 <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center mb-4`}>
                   <category.icon className={`w-6 h-6 ${category.textColor}`} />
