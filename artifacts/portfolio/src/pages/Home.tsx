@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
+import { Highlights } from "@/components/sections/Highlights";
 import { Skills } from "@/components/sections/Skills";
 import { Journey } from "@/components/sections/Journey";
 import { Experience } from "@/components/sections/Experience";
@@ -16,6 +17,7 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <About />
+        <Highlights />
         <Skills />
         <Journey />
         <Experience />
