@@ -50,10 +50,10 @@ export function Skills() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="flex flex-row gap-6 lg:gap-8 max-w-6xl mx-auto overflow-x-auto pb-2"
+        className="flex flex-col gap-6 max-w-3xl mx-auto"
       >
         {SKILL_CATEGORIES.map((category, idx) => (
-          <motion.div key={idx} variants={itemVariants} className="flex-1 min-w-[260px]">
+          <motion.div key={idx} variants={itemVariants}>
             <GlassCard className="h-full hover:scale-[1.02] transition-all duration-300 cursor-default">
               <div className="p-6">
                 <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center mb-4`}>
