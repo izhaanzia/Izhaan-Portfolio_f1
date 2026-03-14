@@ -1,51 +1,116 @@
 import { Section } from "@/components/ui/section";
-import { FeatureSteps } from "@/components/ui/feature-section";
+import RadialOrbitalTimeline from "@/components/ui/radial-orbital-timeline";
+import {
+  Code2,
+  Globe,
+  Briefcase,
+  Award,
+  GraduationCap,
+  Layers,
+  Rocket,
+} from "lucide-react";
 
-const journeySteps = [
+const timelineData = [
   {
-    step: "Chapter 1",
-    title: "Learning the Foundations",
+    id: 1,
+    title: "Core Programming",
+    date: "2021",
     content:
-      "Began with core programming languages — C, C++, Python, and Java — building a strong grasp of logic, data structures, and algorithms.",
-    image:
-      "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=2069&auto=format&fit=crop",
+      "Began with C and C++, building strong foundations in logic, memory management, data structures, and algorithms.",
+    category: "Education",
+    icon: Code2,
+    relatedIds: [2, 7],
+    status: "completed" as const,
+    energy: 100,
   },
   {
-    step: "Chapter 2",
-    title: "Discovering the Web",
+    id: 2,
+    title: "Python & Java",
+    date: "2022",
     content:
-      "Dived into HTML, CSS, and JavaScript, learning to craft responsive layouts and bring designs to life across devices of all sizes.",
-    image:
-      "https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=2064&auto=format&fit=crop",
+      "Expanded into Python and Java, exploring object-oriented design and scripting for a broader language toolkit.",
+    category: "Education",
+    icon: Layers,
+    relatedIds: [1, 3],
+    status: "completed" as const,
+    energy: 95,
   },
   {
-    step: "Chapter 3",
-    title: "Real-World Experience",
+    id: 3,
+    title: "Web Dev Begins",
+    date: "2022",
     content:
-      "Joined ByteUprise as a Web Development Intern — developing responsive interfaces, improving UI components, and optimizing front-end performance.",
-    image:
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop",
+      "Discovered HTML, CSS, and JavaScript — started crafting responsive web pages and understanding how the browser works.",
+    category: "Web",
+    icon: Globe,
+    relatedIds: [2, 4],
+    status: "completed" as const,
+    energy: 90,
   },
   {
-    step: "Chapter 4",
-    title: "Building & Growing",
+    id: 4,
+    title: "Certifications",
+    date: "2023",
     content:
-      "Earning certifications, building personal projects, and continuously leveling up with modern tools like Git, VS Code, and React.",
-    image:
-      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop",
+      "Earned Advanced HTML certification from UpGrad and C/C++ certification from Udemy, validating skills with industry credentials.",
+    category: "Achievement",
+    icon: Award,
+    relatedIds: [3, 5],
+    status: "completed" as const,
+    energy: 85,
+  },
+  {
+    id: 5,
+    title: "Goldman Sachs Sim",
+    date: "2024",
+    content:
+      "Completed the Goldman Sachs Job Simulation via Forage — gained exposure to professional engineering challenges and workflows.",
+    category: "Achievement",
+    icon: Briefcase,
+    relatedIds: [4, 6],
+    status: "completed" as const,
+    energy: 80,
+  },
+  {
+    id: 6,
+    title: "ByteUprise Intern",
+    date: "Apr–May 2025",
+    content:
+      "Joined ByteUprise as a Web Development Intern — built responsive UIs, improved components, and optimised front-end performance.",
+    category: "Experience",
+    icon: Rocket,
+    relatedIds: [5, 7],
+    status: "in-progress" as const,
+    energy: 70,
+  },
+  {
+    id: 7,
+    title: "B.Tech CS",
+    date: "Ongoing",
+    content:
+      "Pursuing B.Tech in Computer Science at Anjuman College of Engineering, Nagpur — deepening theoretical and practical expertise.",
+    category: "Education",
+    icon: GraduationCap,
+    relatedIds: [1, 6],
+    status: "in-progress" as const,
+    energy: 65,
   },
 ];
 
 export function Journey() {
   return (
-    <Section id="journey" className="overflow-hidden">
-      <FeatureSteps
-        features={journeySteps}
-        title="My Developer Journey"
-        autoPlayInterval={4000}
-        imageHeight="h-[400px]"
-        className="p-0"
-      />
+    <Section
+      id="journey"
+      title="My Developer Journey"
+      subtitle="Timeline"
+      className="bg-gradient-to-br from-primary/6 via-background to-violet-500/6"
+    >
+      <div className="max-w-4xl mx-auto">
+        <p className="text-center text-muted-foreground mb-8 text-base max-w-xl mx-auto">
+          Click any orbiting node to explore a milestone. Click an empty area to resume rotation.
+        </p>
+        <RadialOrbitalTimeline timelineData={timelineData} />
+      </div>
     </Section>
   );
 }
